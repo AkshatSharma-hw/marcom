@@ -1,0 +1,13 @@
+{
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "redirects": [
+    { "source": "/", "destination": "/marcomm/", "permanent": false },
+    { "source": "/marcomm", "destination": "/marcomm/", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/marcomm/assets/(.*)", "destination": "/assets/$1" },
+    { "source": "/marcomm/favicon.svg", "destination": "/favicon.svg" },
+    { "source": "/marcomm/(.*)", "destination": "/index.html" }
+  ]
+}

@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   NST Design System — Theme: Black (#090909)
+   shadcn HSL tokens remapped to the NST neutral + semantic palette.
+   Primary = near-black; neutrals = NST gray scale; Poppins type.
+   ============================================================ */
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;      /* nst gray-50  #f9fafb */
+    --foreground: 221 39% 11%;      /* nst gray-900 #111827 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 221 39% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 39% 11%;
+
+    --primary: 0 0% 4%;             /* nst black #090909 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;       /* nst gray-100 #f3f4f6 */
+    --secondary-foreground: 221 39% 11%;
+
+    --muted: 220 14% 96%;           /* nst gray-100 */
+    --muted-foreground: 220 9% 46%; /* nst gray-500 #6b7280 */
+
+    --accent: 220 13% 91%;          /* nst gray-200 #e5e7eb — subtle hover surface */
+    --accent-foreground: 221 39% 11%;
+
+    --destructive: 0 72% 42%;       /* nst red-700 #b91c1c */
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 25 80% 40%;          /* nst amber-700 #b45309 */
+    --warning-foreground: 0 0% 100%;
+
+    --success: 142 72% 29%;         /* nst green-700 #15803d */
+    --success-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;          /* nst gray-200 */
+    --input: 220 13% 91%;
+    --ring: 0 0% 4%;                /* black focus ring */
+
+    --radius: 0.625rem;   /* controls (rounded-md) => 8px, NST radius-sm */
+
+    /* NST light sidebar (admin-console spec): white surface, #E9E9E9 border,
+       dark text, subtle gray hover; black brand pill for the active item. */
+    --sidebar-background: 0 0% 100%;      /* white */
+    --sidebar-foreground: 0 0% 25%;       /* #404040 label/icon text */
+    --sidebar-primary: 0 0% 4%;           /* #090909 brand — logo tile + active pill */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 95%;           /* #F2F2F2 hover row */
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 0 0% 91%;           /* #E9E9E9 */
+    --sidebar-ring: 0 0% 4%;
+
+    /* Right-to-left body copy (Arabic). Poppins ships no Arabic coverage, so
+       RTL content falls through to an Arabic-capable face. UI chrome keeps
+       Poppins — this stack is only applied to localized content bodies. */
+    --font-rtl: "Noto Naskh Arabic", "Noto Sans Arabic", "Geeza Pro",
+      "Al Bayan", "Segoe UI", Tahoma, serif;
+
+    /* CJK body copy (Japanese). Same reason as --font-rtl: Poppins has no CJK
+       coverage, so kanji/kana would render as tofu. Japanese faces lead the
+       stack so shared kanji take Japanese rather than Chinese glyph forms. */
+    --font-cjk: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
+      "Noto Sans JP", "Noto Sans CJK JP", "Meiryo", "MS PGothic", sans-serif;
+  }
+
+  .dark {
+    --background: 0 0% 4%;          /* near-black #0a0a0a */
+    --foreground: 0 0% 96%;
+
+    --card: 0 0% 7%;                /* #121212 */
+    --card-foreground: 0 0% 96%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 96%;
+
+    --primary: 0 0% 96%;           /* white action on dark */
+    --primary-foreground: 0 0% 6%;
+
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 18%;
+    --accent-foreground: 0 0% 96%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --warning: 33 90% 52%;
+    --warning-foreground: 0 0% 8%;
+
+    --success: 142 60% 42%;
+    --success-foreground: 0 0% 8%;
+
+    --border: 0 0% 16%;
+    --input: 0 0% 16%;
+    --ring: 0 0% 90%;
+
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 80%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 8%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ============================================================
+   RTL support (NFR-01..05) — content-level bilingual parity.
+
+   The app shell stays LTR: nothing here flips the layout. These rules only
+   take effect inside a subtree that has explicitly opted in with dir="rtl",
+   which today is the localized content body rendered by <LocaleText>.
+   ============================================================ */
+
+@layer base {
+  [dir="rtl"] {
+    text-align: right;
+  }
+
+  /* Lists inside RTL copy need their marker gutter on the other side —
+     logical padding keeps this to one declaration. */
+  [dir="rtl"] ul,
+  [dir="rtl"] ol {
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 0;
+  }
+
+  /* Arabic ascenders/descenders need more leading than Latin at the same
+     size; keeps localized bodies legible next to their English source. */
+  [dir="rtl"] p {
+    line-height: 1.85;
+  }
+}
+
+@layer utilities {
+  /* Arabic-capable type stack for localized body copy. */
+  .font-rtl {
+    font-family: var(--font-rtl);
+  }
+
+  /* CJK-capable type stack for localized body copy. */
+  .font-cjk {
+    font-family: var(--font-cjk);
+    /* CJK glyphs sit on a full em square, so the same leading that suits
+       Latin reads tight here — matches the RTL treatment above. */
+    line-height: 1.9;
+  }
+}

@@ -1,0 +1,5 @@
+<!-- Brand asset: raw hex values are sanctioned here (favicon renders outside the app's CSS token system). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#090909" />
+  <path d="M8 24V8h3.4l4.6 8.6L20.6 8H24v16h-3.1V14.2l-4 7.3h-1.8l-4-7.3V24H8z" fill="#FFFFFF" />
+</svg>
